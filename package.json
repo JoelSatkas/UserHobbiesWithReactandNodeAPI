@@ -1,0 +1,32 @@
+{
+  "name": "userhobbieswithreactandnodeapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-server": "./BackendAPI/tsc",
+    "dev-server": "ts-node ./BackendAPI/src/server.ts",
+    "start-server": "nodemon ./BackendAPI/output/server.js",
+    "prod-server": "npm run build-server && npm run start-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelSatkas/UserHobbiesWithReactandNodeAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoelSatkas/UserHobbiesWithReactandNodeAPI/issues"
+  },
+  "homepage": "https://github.com/JoelSatkas/UserHobbiesWithReactandNodeAPI#readme",
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.14",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.14",
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  }
+}
