@@ -3,14 +3,13 @@ import * as mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 export const HobbySchema = new Schema({
-    _id: {
-        type: String
-    },
     name: {
-        type: String
+        type: String,
+        required: 'Enter a hobby name'
     },
     passionLevel: {
-        type: String
+        type: String,
+        required: 'Enter a passion level'
     },
     year: {
         type: Date,
