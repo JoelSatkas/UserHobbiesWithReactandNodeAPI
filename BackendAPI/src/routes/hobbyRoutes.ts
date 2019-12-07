@@ -1,33 +1,26 @@
-import {Request, Response} from "express";
+import {HobbyController} from "../controllers/hobbyController"
+import {UserController} from "../controllers/userController";
 
 export class HobbyRoutes {
+
+    public userController: UserController;
+    public hobbyController: HobbyController;
+
+    constructor(userController: UserController, hobbyController: HobbyController) {
+        this.userController = userController;
+        this.hobbyController = hobbyController;
+    }
+
     public routes(app): void {
 
         // User Hobby
         app.route('/hobbies/:userId')
-            .get((req: Request, res: Response) => {
-                // get specific Users Hobbies
-                res.status(200).send({
-                    message: 'GET request successfulll!!!!'
-                })
-            })
-            .post((req: Request, res: Response) => {
-                // get specific Users Hobby
-                res.status(200).send({
-                    message: 'POST request successfulll!!!!'
-                })
-            })
-            .put((req: Request, res: Response) => {
-                // Update a Users Hobby
-                res.status(200).send({
-                    message: 'PUT request successfulll!!!!'
-                })
-            })
-            .delete((req: Request, res: Response) => {
-                // Delete a Users Hobby
-                res.status(200).send({
-                    message: 'DELETE request successfulll!!!!'
-                })
-            });
+            .get(this.userController.getUserWithIDForHobby, this.hobbyController.getHobbies)
+            //1. Find User, 2. Create hobby, 3. Updated user with new hobby
+            .post(this.userController.getUserWithIDForHobby, this.hobbyController.addNewHobby, this.userController.updateHobbyForUser)
+            .delete(this.userController.getUserWithIDForHobby, this.hobbyController.deleteHobby, this.userController.deleteHobbyForUser);
+
+        app.route('/hobbies/:hobbyId')
+            .put(this.hobbyController.updateHobby)
     }
 }

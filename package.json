@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-server": "./BackendAPI/tsc",
+    "build-server": "tsc",
     "dev-server": "ts-node ./BackendAPI/src/server.ts",
     "start-server": "nodemon ./BackendAPI/output/server.js",
     "prod-server": "npm run build-server && npm run start-server"

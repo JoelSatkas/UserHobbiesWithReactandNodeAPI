@@ -1,51 +1,33 @@
 import {Request, Response} from "express";
+import {UserController} from "../controllers/userController"
 
 export class UserRoutes {
+    public userController: UserController;
+
+    constructor(userController: UserController) {
+        this.userController = userController;
+    }
+
     public routes(app): void {
         app.route('/')
             .get((req: Request, res: Response) => {
                 res.status(200).send({
-                    message: 'GET request successfulll!!!!'
+                    message: 'GET request successful'
                 })
             });
 
         // User
         app.route('/user')
-        // GET endpoint
-            .get((req: Request, res: Response) => {
-                // Get all Users
-                res.status(200).send({
-                    message: 'GET request successfulll!!!!'
-                })
-            })
+            // GET endpoint
+            .get(this.userController.getUsers)
             // POST endpoint
-            .post((req: Request, res: Response) => {
-                // Create new User
-                res.status(200).send({
-                    message: 'POST request successfulll!!!!'
-                })
-            });
+            .post(this.userController.addNewUser);
 
         // User detail
         app.route('/user/:userId')
-        // get specific User
-            .get((req: Request, res: Response) => {
-                // Get a single User detail
-                res.status(200).send({
-                    message: 'GET request successfulll!!!!'
-                })
-            })
-            .put((req: Request, res: Response) => {
-                // Update a User
-                res.status(200).send({
-                    message: 'PUT request successfulll!!!!'
-                })
-            })
-            .delete((req: Request, res: Response) => {
-                // Delete a User
-                res.status(200).send({
-                    message: 'DELETE request successfulll!!!!'
-                })
-            });
+            // get specific User
+            .get(this.userController.getUserWithID)
+            .put(this.userController.updateUser)
+            .delete(this.userController.deleteUser);
     }
 }
