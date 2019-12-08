@@ -9,9 +9,11 @@ import { HobbyRoutes } from "./routes/hobbyRoutes";
 import {UserController} from "./controllers/userController";
 import {HobbyController} from "./controllers/hobbyController";
 
+const mongoDbURL = 'mongodb://localhost/Hobbydb';
+
 class App {
     public app: express.Application;
-    public mongoUrl: string = 'mongodb://localhost/Hobbydb';
+    public mongoUrl: string = mongoDbURL;
     public userController: UserController = new UserController();
     public hobbyController: HobbyController = new HobbyController();
     public userRoutes: UserRoutes = new UserRoutes(this.userController);
