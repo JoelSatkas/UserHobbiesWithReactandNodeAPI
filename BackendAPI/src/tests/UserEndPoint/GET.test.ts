@@ -8,3 +8,7 @@ describe('GET Endpoints', () => {
         expect(res.statusCode).toEqual(200);
     })
 });
+
+afterEach(async () => {
+    await app.close();
+});

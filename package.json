@@ -8,7 +8,7 @@
     "dev-server": "ts-node ./BackendAPI/src/server.ts",
     "start-server": "nodemon ./BackendAPI/output/server.js",
     "prod-server": "npm run build-server && npm run start-server",
-    "test-server": "jest --config ./BackendAPI/jest.config.js"
+    "test-server": "jest --config ./BackendAPI/jest.config.js --runInBand"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validation": "^1.0.3",
+    "express-validator": "^6.3.0",
     "jest": "^24.9.0",
     "mongoose": "^5.7.14",
     "nodemon": "^2.0.1",

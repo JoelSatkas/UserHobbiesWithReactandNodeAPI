@@ -1,5 +1,6 @@
 import {HobbyController} from "../controllers/hobbyController"
 import {UserController} from "../controllers/userController";
+const {GETHobbyValidationRules, POSTHobbyValidationRules, PUTHobbyValidationRules, DELETEHobbyValidationRules, validateHobby,} = require("../validators/hobbyValidators/hobbyValidation");
 
 export class HobbyRoutes {
 
@@ -15,12 +16,12 @@ export class HobbyRoutes {
 
         // User Hobby
         app.route('/hobbies/:userId')
-            .get(this.userController.getUserWithIDForHobby, this.hobbyController.getHobbies)
+            .get(GETHobbyValidationRules(), validateHobby, this.userController.getUserWithIDForHobby, this.hobbyController.getHobbies)
             //1. Find User, 2. Create hobby, 3. Updated user with new hobby
-            .post(this.userController.getUserWithIDForHobby, this.hobbyController.addNewHobby, this.userController.updateHobbyForUser)
-            .delete(this.userController.getUserWithIDForHobby, this.hobbyController.deleteHobby, this.userController.deleteHobbyForUser);
+            .post(POSTHobbyValidationRules(), validateHobby, this.userController.getUserWithIDForHobby, this.hobbyController.addNewHobby, this.userController.updateHobbyForUser)
+            .delete(DELETEHobbyValidationRules(), validateHobby, this.userController.getUserWithIDForHobby, this.hobbyController.deleteHobby, this.userController.deleteHobbyForUser);
 
         app.route('/hobbies/:hobbyId')
-            .put(this.hobbyController.updateHobby)
+            .put(PUTHobbyValidationRules(), validateHobby, this.hobbyController.updateHobby)
     }
 }

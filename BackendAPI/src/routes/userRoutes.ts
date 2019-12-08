@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
-import {UserController} from "../controllers/userController"
+import {UserController} from "../controllers/userController";
+const { GETUserValidationRules, POSTUserValidationRules, PUTUserValidationRules, DELETEUserValidationRules, validateUser, } = require('../validators/userValidators/userValidation');
 
 export class UserRoutes {
     public userController: UserController;
@@ -19,15 +20,15 @@ export class UserRoutes {
         // User
         app.route('/user')
             // GET endpoint
-            .get(this.userController.getUsers)
+            .get(GETUserValidationRules(), validateUser, this.userController.getUsers)
             // POST endpoint
-            .post(this.userController.addNewUser);
+            .post(POSTUserValidationRules(), validateUser, this.userController.addNewUser);
 
         // User detail
         app.route('/user/:userId')
             // get specific User
             .get(this.userController.getUserWithID)
-            .put(this.userController.updateUser)
-            .delete(this.userController.deleteUser);
+            .put(PUTUserValidationRules(), validateUser, this.userController.updateUser)
+            .delete(DELETEUserValidationRules(), validateUser, this.userController.deleteUser);
     }
 }
