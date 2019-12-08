@@ -1,4 +1,7 @@
 import * as express from "express";
+let cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 import { UserRoutes } from "./routes/userRoutes";
@@ -19,11 +22,14 @@ class App {
         this.config();
         this.userRoutes.routes(this.app);
         this.hobbyRoutes.routes(this.app);
+        this.app.use('/api-docs', swaggerUi.serve);
+        this.app.get('/api-docs', swaggerUi.setup(swaggerDocument));
         this.mongoSetup();
         // this.insertTestData();
     }
 
     private config(): void{
+        this.app.use(cors());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
     }

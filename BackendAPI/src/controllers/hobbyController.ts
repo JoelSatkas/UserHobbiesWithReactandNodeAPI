@@ -7,6 +7,7 @@ const Hobby = mongoose.model('Hobby', HobbySchema);
 export class HobbyController {
     public addNewHobby(req: Request, res: Response, next: NextFunction) {
         let newHobby = new Hobby(req.body);
+        newHobby.user = req.params.userId;
         newHobby.save((hobbyError, hobby) => {
             if (hobbyError) {
                 res.send(hobbyError);
@@ -17,7 +18,7 @@ export class HobbyController {
     }
 
     public getHobbies(req: Request, res: Response) {
-        Hobby.find({}, (err, hobby) => {
+        Hobby.find({user: res.locals.user._id}, (err, hobby) => {
             if(err){
                 res.send(err);
             }
@@ -26,7 +27,7 @@ export class HobbyController {
     }
 
     public updateHobby (req: Request, res: Response) {
-        Hobby.findOneAndUpdate({ _id: req.params.hobbyId }, req.body, { new: true }, (err, hobby) => {
+        Hobby.findOneAndUpdate({ _id: req.body.hobbyId }, req.body, { new: true }, (err, hobby) => {
             if(err){
                 res.send(err);
             }
@@ -35,7 +36,7 @@ export class HobbyController {
     }
 
     public deleteHobby (req: Request, res: Response, next: NextFunction) {
-        Hobby.remove({ _id: req.params.hobbyId }, (err, hobby) => {
+        Hobby.remove({ _id: req.body.hobbyId }, (err, hobby) => {
             if(err){
                 res.send(err);
             }

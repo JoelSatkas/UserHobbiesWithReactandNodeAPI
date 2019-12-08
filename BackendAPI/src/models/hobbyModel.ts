@@ -14,5 +14,9 @@ export const HobbySchema = new Schema({
     year: {
         type: Date,
         default: Date.now
+    },
+    user: {
+        type: String,
+        required: 'Enter the user for the hobby'
     }
 });
