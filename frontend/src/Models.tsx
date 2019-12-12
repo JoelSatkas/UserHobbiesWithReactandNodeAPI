@@ -11,3 +11,9 @@ interface IHobbyModel {
     passionLevel: string,
     year: Date
 }
+
+interface INewHobbyObject {
+    name: string,
+    passionLevel: string,
+    year: Date
+}

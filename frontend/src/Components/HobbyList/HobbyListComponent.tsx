@@ -2,9 +2,11 @@ import React from 'react';
 import {createStyles, Grid, makeStyles, Theme} from "@material-ui/core";
 import UserListItem from "../UserListItem/UserListItemComponent";
 import HobbyListItem from "../HobbyListItem/HobbyListItemComponent";
+import AddNewHobby from "../AddNewHobby/AddNewHobbyComponent";
 
 type HobbyListProps = {
     hobbies: IHobbyModel[]
+    addNewHobby: (newHobbyItem: INewHobbyObject) => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,6 +30,7 @@ const HobbyList = (props: HobbyListProps) => {
                   direction="column"
                   justify="flex-start"
                   alignItems="center">
+                <AddNewHobby onSubmit={props.addNewHobby}/>
                 {props.hobbies.map( (hobby: IHobbyModel) => {
                     return <Grid key={hobby._id} item xs={12}>
                         <HobbyListItem hobby={hobby} />

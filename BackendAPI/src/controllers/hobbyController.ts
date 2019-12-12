@@ -12,7 +12,7 @@ export class HobbyController {
             if (hobbyError) {
                 res.send(hobbyError);
             }
-            res.locals.hobbyId = hobby._id;
+            res.locals.hobby = hobby;
             next();
         });
     }
